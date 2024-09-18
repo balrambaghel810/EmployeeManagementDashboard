@@ -101,7 +101,7 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const designation = "sales"; // Adjust this based on the current page
+        const designation = "salesperson"; // Adjust this based on the current page
         const employees = JSON.parse(localStorage.getItem(designation)) || [];
 
         if (employees.length === 0) {
@@ -141,7 +141,7 @@
       }
 
       function editEmployee(index) {
-        const designation = "sales"; // Adjust this based on the current page
+        const designation = "salesperson"; // Adjust this based on the current page
         const employees = JSON.parse(localStorage.getItem(designation)) || [];
         const employee = employees[index];
 
@@ -155,7 +155,7 @@
       }
 
       function deleteEmployee(index) {
-        const designation = "sales";
+        const designation = "salesperson";
         const employees = JSON.parse(localStorage.getItem(designation)) || [];
         employees.splice(index, 1);
         localStorage.setItem(designation, JSON.stringify(employees));
@@ -169,7 +169,7 @@
 
           const index = document.getElementById("employeeIndex").value;
           let designation = document.getElementById("designation").value;
-          const currentDesignation = "sales"; // Adjust this based on the current page
+          const currentDesignation = "salesperson"; // Adjust this based on the current page
           let employees =
             JSON.parse(localStorage.getItem(currentDesignation)) || [];
 
