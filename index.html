@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Cards with Navbar</title>
+    <link rel="stylesheet" href="./CSS/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <button class="toggle-button" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <h1 class="navbar-title">Employee Management Department</h1>
+      <a href="#" class="profile-button">
+        <button
+          id="addEmployeeBtn"
+          class="add-employee-button"
+          onclick="showForm()"
+        >
+          Add Employee
+        </button>
+      </a>
+    </nav>
+
+    <!-- Sidebar with navigation links -->
+    <div id="sidebar" class="sidebar">
+      <a href="#">Profile</a>
+      <a href="#">Salary Transactions</a>
+      <a href="#">Attendance</a>
+      <a href="#">Daily Task</a>
+      <a href="#">Sign Out</a>
+    </div>
+
+    <!-- Overlay to disable the page when the sidebar is open -->
+    <div id="overlay" onclick="closeSidebar()" style="display: none"></div>
+
+    <section class="hero-section">
+      <div class="card">
+        <img src="./images/hrDepartment.webp" alt="HR Department" />
+        <div class="card-content">
+          <h2>HR Department</h2>
+          <a href="./Departments/hrDepartment.html" class="btn">View Details</a>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="./images/telecallerDepartment.webp"
+          alt="Telecaller Department"
+        />
+        <div class="card-content">
+          <h2>Telecaller Department</h2>
+          <a href="./Departments/telecallerDepartment.html" class="btn"
+            >View Details</a
+          >
+        </div>
+      </div>
+      <div class="card">
+        <img src="./images/salesDepartment.jpg" alt="Sales Department" />
+        <div class="card-content">
+          <h2>Sales Department</h2>
+          <a href="./Departments/salesDepartment.html" class="btn"
+            >View Details</a
+          >
+        </div>
+      </div>
+      <div class="card">
+        <img src="./images/trainerDepartment.webp" alt="Trainer Department" />
+        <div class="card-content">
+          <h2>Trainer Department</h2>
+          <a href="./Departments/trainerDepartment.html" class="btn"
+            >View Details</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for Add Employee Form -->
+    <form id="employeeForm" onsubmit="handleSubmit(event)">
+      <h2>Add Employee</h2>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="number">Number:</label>
+      <input type="number" id="number" name="number" required />
+
+      <label for="designation">Designation:</label>
+      <select id="designation" name="designation" required>
+        <option value="">Select Designation</option>
+        <option value="salesperson">Salesperson</option>
+        <option value="trainer">Trainer</option>
+        <option value="hr">HR</option>
+        <option value="telecaller">Telecaller</option>
+      </select>
+
+      <label for="salary">Salary:</label>
+      <input type="number" id="salary" name="salary" required />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <div class="form-buttons">
+        <button type="submit">Submit</button>
+        <button type="button" onclick="cancelForm()">Cancel</button>
+      </div>
+    </form>
+
+    <div id="successMessage" style="display: none">
+      Employee data saved successfully!
+    </div>
+
+    <script src="./JS/script.js"></script>
+  </body>
+</html>

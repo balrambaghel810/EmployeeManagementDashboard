@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>telecaller Department</title>
+    <link rel="stylesheet" href="../CSS/department.css" />
+    <link rel="stylesheet" href="../CSS/styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>telecaller Department</h1>
+      <button id="backToHome" class="home-button">Back to Home</button>
+    </div>
+
+    <div id="employeeTableContainer">
+      <table id="employeeTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Designation</th>
+            <th>Salary</th>
+            <th>Gender</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Employee data will be dynamically inserted here -->
+        </tbody>
+      </table>
+      <p id="noDataMessage" style="display: none">EMPTY</p>
+    </div>
+
+    <!-- Modal for Edit Employee Form -->
+    <form id="employeeForm" style="display: none">
+      <h2>Edit Employee</h2>
+      <input type="hidden" id="employeeIndex" />
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="number">Number:</label>
+      <input type="number" id="number" name="number" required />
+
+      <label for="designation">Designation:</label>
+      <select id="designation" name="designation" required>
+        <option value="">Select Designation</option>
+        <option value="salesperson">Salesperson</option>
+        <option value="trainer">Trainer</option>
+        <option value="hr">HR</option>
+        <option value="telecaller">Telecaller</option>
+      </select>
+
+      <label for="salary">Salary:</label>
+      <input type="number" id="salary" name="salary" required />
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <div class="form-buttons">
+        <button type="submit">Save</button>
+        <button type="button" onclick="cancelForm()">Cancel</button>
+      </div>
+    </form>
+
+    <div id="successMessage" style="display: none">
+      Employee data updated successfully!
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const designation = "telecaller"; // Adjust this based on the current page
+        const employees = JSON.parse(localStorage.getItem(designation)) || [];
+
+        if (employees.length === 0) {
+          document.getElementById("noDataMessage").style.display = "block";
+        } else {
+          document.getElementById("noDataMessage").style.display = "none";
+          displayEmployees(employees);
+        }
+      });
+
+      function displayEmployees(employees) {
+        const tbody = document.querySelector("#employeeTable tbody");
+        tbody.innerHTML = ""; // Clear existing data
+
+        employees.forEach((employee, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${employee.name}</td>
+            <td>${employee.number}</td>
+            <td>${employee.designation}</td>
+            <td>${employee.salary}</td>
+            <td>${employee.gender}</td>
+            <td>
+                <button class="edit" onclick="editEmployee(${index})">✎</button>
+                <button class="delete" onclick="deleteEmployee(${index})">🗑️</button>
+            </td>
+        `;
+          tbody.appendChild(row);
+        });
+      }
+
+      function editEmployee(index) {
+        const designation = "telecaller"; // Adjust this based on the current page
+        const employees = JSON.parse(localStorage.getItem(designation)) || [];
+        const employee = employees[index];
+
+        document.getElementById("employeeForm").style.display = "block";
+        document.getElementById("employeeIndex").value = index;
+        document.getElementById("name").value = employee.name;
+        document.getElementById("number").value = employee.number;
+        document.getElementById("designation").value = employee.designation;
+        document.getElementById("salary").value = employee.salary;
+        document.getElementById("gender").value = employee.gender;
+      }
+
+      function deleteEmployee(index) {
+        const designation = "telecaller"; // Adjust this based on the current page
+        const employees = JSON.parse(localStorage.getItem(designation)) || [];
+        employees.splice(index, 1);
+        localStorage.setItem(designation, JSON.stringify(employees));
+        location.reload(); // Refresh the page to update the table
+      }
+
+      document
+        .getElementById("employeeForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const index = document.getElementById("employeeIndex").value;
+          let designation = document.getElementById("designation").value;
+          const currentDesignation = "telecaller"; // Adjust this based on the current page
+          let employees =
+            JSON.parse(localStorage.getItem(currentDesignation)) || [];
+
+          const updatedEmployee = {
+            name: document.getElementById("name").value,
+            number: document.getElementById("number").value,
+            designation: designation,
+            salary: document.getElementById("salary").value,
+            gender: document.getElementById("gender").value,
+          };
+
+          if (index !== "") {
+            // Remove from the current designation if changed
+            if (employees[index].designation !== designation) {
+              deleteEmployee(index); // Assuming you have a function to delete the employee from the UI
+              employees = JSON.parse(localStorage.getItem(designation)) || [];
+              employees.push(updatedEmployee);
+            } else {
+              employees[index] = updatedEmployee;
+            }
+          } else {
+            employees.push(updatedEmployee);
+          }
+
+          // Update localStorage
+          localStorage.setItem(currentDesignation, JSON.stringify(employees));
+          if (designation !== currentDesignation) {
+            // Move data to the new designation
+            let newDesignationEmployees =
+              JSON.parse(localStorage.getItem(designation)) || [];
+            newDesignationEmployees.push(updatedEmployee);
+            localStorage.setItem(
+              designation,
+              JSON.stringify(newDesignationEmployees)
+            );
+
+            // Delete from the current page
+            deleteEmployee(index); // Assuming you have a function to delete the employee from the UI
+          }
+
+          document.getElementById("employeeForm").style.display = "none";
+          document.getElementById("successMessage").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("successMessage").style.display = "none";
+          }, 2000);
+
+          displayEmployees(employees); // Update the table
+        });
+      function cancelForm() {
+        document.getElementById("employeeForm").style.display = "none";
+      }
+
+      document.getElementById("backToHome").addEventListener("click", () => {
+        window.location.href = "../index.html"; // Adjust to the correct path if necessary
+      });
+    </script>
+  </body>
+</html>

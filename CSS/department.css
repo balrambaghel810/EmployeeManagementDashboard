@@ -1,0 +1,181 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  margin: 0;
+}
+
+.home-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+}
+
+#employeeTableContainer {
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+img {
+  width: 50px;
+  height: auto;
+}
+
+.edit,
+.delete {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  margin: 0 5px;
+}
+
+.edit:hover {
+  color: #007bff;
+}
+
+.delete:hover {
+  color: #dc3545;
+}
+
+#employeeForm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 100%; /* Make form responsive */
+  max-width: 500px;
+}
+
+.form-buttons {
+  margin-top: 10px;
+}
+
+.form-buttons button {
+  margin-right: 10px;
+}
+
+#successMessage {
+  position: fixed;
+  top: 20px;
+  right: 40%;
+  background: #28a746d5;
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 5px;
+}
+
+/* Media Queries for Responsiveness */
+
+/* Small screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  .home-button {
+    padding: 8px 16px;
+  }
+
+  #employeeTableContainer {
+    margin: 10px;
+    overflow-x: scroll; /* Enable horizontal scrolling if table overflows */
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  #employeeForm {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  #successMessage {
+    right: 10%;
+    padding: 15px 30px;
+  }
+}
+
+/* Extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .home-button {
+    padding: 6px 12px;
+  }
+
+  th,
+  td {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  img {
+    width: 40px;
+  }
+
+  .edit,
+  .delete {
+    font-size: 14px;
+  }
+
+  #employeeForm {
+    padding: 15px;
+  }
+
+  #successMessage {
+    top: 10px;
+    right: 5%;
+    padding: 10px 20px;
+  }
+}
