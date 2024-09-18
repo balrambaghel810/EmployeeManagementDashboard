@@ -399,10 +399,10 @@ select {
     padding: 15px; /* Reduce padding for smaller devices */
     max-width: 350px;
   }
-  select,
+  /* select,
   option {
     width: 10rem;
-  }
+  } */
 
   #employeeForm input,
   #employeeForm select {
