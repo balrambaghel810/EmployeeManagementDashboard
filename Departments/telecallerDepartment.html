@@ -6,6 +6,13 @@
     <title>telecaller Department</title>
     <link rel="stylesheet" href="../CSS/department.css" />
     <link rel="stylesheet" href="../CSS/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <div class="header">
@@ -96,10 +103,10 @@
             <td>${employee.designation}</td>
             <td>${employee.salary}</td>
             <td>${employee.gender}</td>
-            <td>
-                <button class="edit" onclick="editEmployee(${index})">✎</button>
-                <button class="delete" onclick="deleteEmployee(${index})">🗑️</button>
-            </td>
+           <td>
+        <button class="edit" onclick="editEmployee(${index})"><i class="fa-solid fa-pencil"></i></button>
+        <button class="delete" onclick="deleteEmployee(${index})"><i class="fa-solid fa-trash"></i></button>
+      </td>
         `;
           tbody.appendChild(row);
         });
